@@ -1,9 +1,0 @@
-BLOCK_SIZE_IN_SECONDS = 0.4
-BRIGHTNESS_MAX = 255
-FILE_HALT = "/tmp/pi-monitor-stop"
-FILE_LOUDNESS = "/tmp/pi-monitor-loudness"
-FILE_LOUDNESS_BASE = "/tmp/pi-monitor-loudness-base"
-FILE_LOUDNESS_SENSITIVITY = "/tmp/pi-monitor-loudness-sensitivity"
-FILE_ATMOSPHERE = "/tmp/pi-monitor-atmosphere"
-FILE_ATMOSPHERE_OUTSIDE = "/tmp/pi-monitor-atmosphere-outside"
-LEVEL_CHAR = "/"
