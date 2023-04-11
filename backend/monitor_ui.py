@@ -77,4 +77,4 @@ def index():
 if __name__ == "__main__":
     if not APP_SECRET:
         raise ValueError("no APP_SECRET")
-    app.run(host="0.0.0.0", port=PORT, debug=True)
+    app.run(host="0.0.0.0", port=PORT, debug=False)
