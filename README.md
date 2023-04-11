@@ -10,11 +10,13 @@ This is a python + react ui audio monitoring tool (indicative of baby monitoring
 
 The more sound the microphone picks up, the brighter the connected smart lights shine with sensitivity and base loudness adjustments (enabling tweaking the mic for the room).
 
-What you need:
+### What you need
 
 - rpi + usb microphone
 - philips hue bridge light system on same local network as rpi
 - (optional) DHT22 temperature + humidity sensor
+
+### How to run this
 
 ```sh
 
