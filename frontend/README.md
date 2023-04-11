@@ -2,7 +2,7 @@
 
 ## @reduxjs/toolkit + useReducer + useContext = 🌈💥
 
-### How to change the frontend on the pi:
+### How to change the frontend on the pi
 
 Flask frontend is already built and saved within "./backend/static". However if you want to further augment your experience here's the deal:
 
