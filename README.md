@@ -47,8 +47,11 @@ chomd a+x ./get_outside_atmosphere.sh ./get_outside_atmosphere.sh
 ### ./backend/.env
 
 APP_SECRET = simple not very secure way to gate all flask APIs
+
 BRIDGE_USERNAME = username from Hue bridge
+
 BRIDGE_HOST=http://192.168.30.20
+
 WEATHER_API_USER_AGENT_SECRET = with weather.gov to get outside metrics
 example: (pi-monitor, yourail@email.com)
 
