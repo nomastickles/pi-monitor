@@ -29,18 +29,21 @@ pip install pyaudio pyloudnorm python-dotenv marshmallow
 pip install --upgrade numpy
 pip install --upgrade Flask
 
+# 3. fill out ./backend/.env file
+cp ./backend/.env-sample ./backend/.env
+
 # following should have “Class=Audio, Driver=snd-usb-audio”
 lsusb -t
-# 3. running get_audio_device_index will tell you the mic index is
+# 4. running get_audio_device_index will tell you the mic index is
 python3 ./backend/get_audio_device_index.py
-
-# 4. create/fill out ./backend/.env
 
 # 5. then edit start_monitor_audio.sh with your mic index and other options
 chmod a+x ./start_monitor_audio.sh && ./start_monitor_audio.sh
+
+# 6. run the UI
 chomd a+x ./start_monitor_ui.sh && ./start_monitor_ui.sh
 
-# if temperature sensor:
+# (optional) if temperature sensor:
 chomd a+x ./get_outside_atmosphere.sh ./get_outside_atmosphere.sh
 ```
 
