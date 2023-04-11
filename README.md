@@ -46,7 +46,7 @@ chomd a+x ./get_outside_atmosphere.sh ./get_outside_atmosphere.sh
 
 ### ./backend/.env
 
-APP_SECRET = simple not very secure way to gate all flask APIs
+APP_SECRET = simple not very secure way to gate all flask routes
 
 BRIDGE_USERNAME = username from Hue bridge
 
