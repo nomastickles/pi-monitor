@@ -1,5 +1,6 @@
 {
   "name": "pi-monitor-ui",
+  "homepage": "https://nomastickles.github.io/pi-monitor",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -27,11 +28,12 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PUBLIC_URL=/ react-scripts start",
     "start:demo": "REACT_APP_IS_DEMO=1 && yarn start",
     "build": "react-scripts build",
+    "build:local": "PUBLIC_URL=/ react-scripts build",
     "test": "react-scripts test",
-    "build:copy-files": "yarn build && ./copy_files_to_flask.sh pi 192.168.5.123",
+    "build:copy-files": "yarn build:local && ./copy_files_to_flask.sh pi 192.168.5.123",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build -u 'github-actions-bot <support+actions@github.com>'"
   },
