@@ -15,5 +15,5 @@ if [ -z "$USER" ] || [ -z "$$HOST" ]; then
   exit 0
 fi
 
-scp ../backend/templates/index.html "$USER@$HOST:/home/$USER/magic-time-tracker/backend/templates/index.html"
-scp -r ../backend/static "$USER@$HOST:/home/$USER/magic-time-tracker/backend/static
+scp ../backend/templates/index.html "$USER@$HOST:/home/$USER/pi-monitor/backend/templates/index.html"
+scp -r ../backend/static "$USER@$HOST:/home/$USER/pi-monitor/backend/static

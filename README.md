@@ -39,6 +39,8 @@ lsusb -t
 # 4. running get_audio_device_index will tell you the mic index is
 python3 ./backend/get_audio_device_index.py
 
+chmod a+x start_monitor_audio.sh start_monitor_ui.sh start_monitor_atmosphere.sh
+
 # 5. then edit start_monitor_audio.sh with your mic index and other options (and make files executable)
 ./start_monitor_audio.sh
 
