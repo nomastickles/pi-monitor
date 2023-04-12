@@ -189,33 +189,27 @@ function App() {
           </FormGroup>
           <Box sx={{ m: 5 }} />
 
-          {isUsingLogarithmic && (
-            <>
-              <Slider
-                aria-label="log"
-                value={logMultiplierValue}
-                valueLabelDisplay="on"
-                min={1}
-                max={200}
-                onChange={(event: any) => {
-                  dispatch(
-                    actions.setAppData({
-                      dataName: "LOUDNESS_SENSITIVITY",
-                      data: event.target.value,
-                    })
-                  );
-                  updateDataToServer(
-                    "LOUDNESS_SENSITIVITY",
-                    event.target.value
-                  );
-                }}
-              />
-              <Typography gutterBottom>{logarithmicEquation}</Typography>
-              <Box sx={{ ml: -4 }}>
-                <div id="function-plot"></div>
-              </Box>
-            </>
-          )}
+          <Slider
+            disabled={!isUsingLogarithmic}
+            aria-label="log"
+            value={logMultiplierValue}
+            valueLabelDisplay="on"
+            min={1}
+            max={200}
+            onChange={(event: any) => {
+              dispatch(
+                actions.setAppData({
+                  dataName: "LOUDNESS_SENSITIVITY",
+                  data: event.target.value,
+                })
+              );
+              updateDataToServer("LOUDNESS_SENSITIVITY", event.target.value);
+            }}
+          />
+          <Typography gutterBottom>{logarithmicEquation}</Typography>
+          <Box sx={{ ml: -4 }}>
+            <div id="function-plot"></div>
+          </Box>
         </Box>
       </header>
     </div>

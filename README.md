@@ -39,14 +39,14 @@ lsusb -t
 # 4. running get_audio_device_index will tell you the mic index is
 python3 ./backend/get_audio_device_index.py
 
-# 5. then edit start_monitor_audio.sh with your mic index and other options
-chmod a+x ./start_monitor_audio.sh && ./start_monitor_audio.sh
+# 5. then edit start_monitor_audio.sh with your mic index and other options (and make files executable)
+./start_monitor_audio.sh
 
 # 6. run the UI
-chomd a+x ./start_monitor_ui.sh && ./start_monitor_ui.sh
+./start_monitor_ui.sh
 
-# (optional) if temperature sensor:
-chomd a+x ./get_outside_atmosphere.sh ./get_outside_atmosphere.sh
+# (optional) if temperature sensor in play:
+./get_outside_atmosphere.sh
 ```
 
 ## ./backend/.env
@@ -79,6 +79,7 @@ Example cron:
 
 ## TODO
 
+- HTTPS
 - count nearby network mac addresses with Airodump-ng and save to file
 - send all values of /tmp/pi-monitor files to managed grafana in aws
 

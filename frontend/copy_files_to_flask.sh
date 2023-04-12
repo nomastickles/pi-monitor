@@ -6,8 +6,14 @@ JS_FILE=$(ls -tpr ./build/static/js/main.*.js | tail -n 1)
 JS_FILENAME=$(echo $JS_FILE | grep "main.*$" -o)
 CSS_FILENAME=$(echo $CSS_FILE | grep "main.*$" -o)
 
-sed -i "" -e "s/main.*.js/$JS_FILENAME/" flask_template.html
-sed -i "" -E "s/main.*.css/$CSS_FILENAME/g" flask_template.html
+cp $CSS_FILE $JS_FILE ../backend/static/
+sed -i "" -e "s/main.*.js/$JS_FILENAME/" ../backend/templates/index.html
+sed -i "" -E "s/main.*.css/$CSS_FILENAME/g" ../backend/templates/index.html
 
-scp $JS_FILE $CSS_FILE "$USER@$HOST:/home/$USER/pi-monitor/backend/static/"
-scp flask_template.html "$USER@$HOST:/home/$USER/pi-monitor/backend/templates/index.html"
+if [ -z "$USER" ] || [ -z "$$HOST" ]; then
+  echo "no USER/HOST"
+  exit 0
+fi
+
+scp ../backend/templates/index.html "$USER@$HOST:/home/$USER/magic-time-tracker/backend/templates/index.html"
+scp -r ../backend/static "$USER@$HOST:/home/$USER/magic-time-tracker/backend/static

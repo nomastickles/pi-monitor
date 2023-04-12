@@ -15,7 +15,6 @@ dhtDevice = adafruit_dht.DHT22(board.D4, use_pulseio=False)
 # you can pass DHT22 use_pulseio=False if you wouldn't like to use pulseio.
 # This may be necessary on a Linux single board computer like the Raspberry Pi,
 # but it will not work in CircuitPython.
-# dhtDevice = adafruit_dht.DHT22(board.D18, use_pulseio=False)
 
 LOGLEVEL = os.environ.get("LOGLEVEL", "WARNING").upper()
 logging.basicConfig(format="%(asctime)s %(message)s", level=LOGLEVEL)
@@ -48,6 +47,7 @@ def main():
                 )
             )
 
+            # do we need to store both C and F? nope but whatevs
             data = {
                 "TEMP_C": temperature_c,
                 "TEMP_F": temperature_f,
