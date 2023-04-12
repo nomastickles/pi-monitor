@@ -1,6 +1,7 @@
 #!/bin/bash
 
 LOG_FILE="/tmp/pi-monitor-ui-$(date +"%FT%H%M%S").log"
+FLASK_DEBUG=1
 
 nohup python ./backend/monitor_ui.py \
   >>$LOG_FILE 2>&1 &

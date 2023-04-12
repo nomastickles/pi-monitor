@@ -16,4 +16,4 @@ if [ -z "$USER" ] || [ -z "$$HOST" ]; then
 fi
 
 scp ../backend/templates/index.html "$USER@$HOST:/home/$USER/pi-monitor/backend/templates/index.html"
-scp -r ../backend/static "$USER@$HOST:/home/$USER/pi-monitor/backend/static
+scp -r ../backend/static "$USER@$HOST:/home/$USER/pi-monitor/backend"

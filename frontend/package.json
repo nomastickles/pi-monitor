@@ -31,7 +31,7 @@
     "start:demo": "REACT_APP_IS_DEMO=1 && yarn start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "build:copy-files-to-flask": "yarn build && ./copy_files_to_flask.sh $MAGIC_USER $MAGIC_HOST",
+    "build:copy-files": "yarn build && ./copy_files_to_flask.sh pi 192.168.5.123",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build -u 'github-actions-bot <support+actions@github.com>'"
   },
