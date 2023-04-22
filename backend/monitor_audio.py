@@ -6,6 +6,7 @@ https://github.com/pklaus/pklaus/tree/master/pklaus/audio/level
 using this rad library
 https://github.com/csteinmetz1/pyloudnorm
 
+So what's the deal here?
 
 
 
@@ -57,7 +58,7 @@ def main():
     parser.add_argument("--record-delay-seconds", default=5, type=int)
     args = parser.parse_args()
 
-    should_turn_off_lights = False
+    should_turn_off_lights = True  # init  reset
     bridge_light_names = args.bridge_light_names
     can_update_lights = bool(bridge_username and bridge_host and bridge_light_names)
     bridge_url_base = ""
