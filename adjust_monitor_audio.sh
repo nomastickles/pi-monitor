@@ -45,8 +45,8 @@ while :; do
     ;;
   esac
   echo "$VALUE"
-  echo $VALUE >$FILE_TMP
-  $(mv $FILE_TMP $FILE)
-  $(rm $FILE_TMP)
+  echo "$VALUE > $FILE_TMP"
+  mv "$FILE_TMP" "$FILE"
+  rm "$FILE_TMP"
 
 done

@@ -14,7 +14,7 @@ BASE_LOUDNESS=$2
 
 ./blink1-tool --off
 
-while [ true ]; do
+while true; do
   RESULT=$(curl "$URL" | jq '.LOUDNESS' | bc)
   if (($(echo "$RESULT > $BASE_LOUDNESS" | bc -l))); then
     echo "$RESULT > $BASE_LOUDNESS"

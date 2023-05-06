@@ -14,4 +14,4 @@ nohup python ./backend/monitor_audio.py \
 
 ps aux | grep monitor_audio.py
 
-VAR=$(ls -tpr /tmp/pi-monitor-audio-* | tail -n 1) && echo $VAR
+ls -tpr /tmp/pi-monitor-audio-* | tail -n 1

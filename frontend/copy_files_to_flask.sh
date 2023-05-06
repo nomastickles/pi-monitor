@@ -1,3 +1,5 @@
+#!/bin/bash
+
 USER=$1
 HOST=$2
 
@@ -10,7 +12,7 @@ cp $CSS_FILE $JS_FILE ../backend/static/
 sed -i "" -e "s/main.*.js/$JS_FILENAME/" ../backend/templates/index.html
 sed -i "" -E "s/main.*.css/$CSS_FILENAME/g" ../backend/templates/index.html
 
-if [ -z "$USER" ] || [ -z "$$HOST" ]; then
+if [ -z "$USER" ] || [ -z "$HOST" ]; then
   echo "no USER/HOST"
   exit 0
 fi
