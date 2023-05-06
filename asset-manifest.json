@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.css": "/pi-monitor/static/css/main.343c7e85.css",
-    "main.js": "/pi-monitor/static/js/main.4c87af65.js",
+    "main.css": "/pi-monitor/static/css/main.0dc592ad.css",
+    "main.js": "/pi-monitor/static/js/main.43a16496.js",
     "static/js/27.dd552876.chunk.js": "/pi-monitor/static/js/27.dd552876.chunk.js",
     "index.html": "/pi-monitor/index.html"
   },
   "entrypoints": [
-    "static/css/main.343c7e85.css",
-    "static/js/main.4c87af65.js"
+    "static/css/main.0dc592ad.css",
+    "static/js/main.43a16496.js"
   ]
 }
