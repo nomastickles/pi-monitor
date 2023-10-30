@@ -7,7 +7,7 @@ LOG_FILE="/tmp/pi-monitor-audio-$(date +"%FT%H%M%S").log"
 #  --bridge-light-names "Hue Go,Eat 1,Eat 2,Eat 3" \
 nohup python ./backend/monitor_audio.py \
   --input-device-index 4 \
-  --bridge-light-names "Hue Go" \
+  --bridge-light-names "Hue Go,Hue Go Go" \
   --display-visual \
   --record-loudness \
   >>$LOG_FILE 2>&1 &

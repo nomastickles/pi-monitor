@@ -10,8 +10,11 @@ from typing import Union
 import numpy
 
 
+PATH_DATA = "/tmp/"
+
+
 def check_for_halt() -> bool:
-    if os.path.exists(constants.FILE_HALT):
+    if os.path.exists(PATH_DATA + constants.FILE_HALT):
         return True
     return False
 
@@ -28,9 +31,14 @@ def has_datetime_elapsed(datetime_incoming: datetime) -> bool:
 
 def write_file(filename: str, content: str) -> None:
     file_temp = f"{filename}-temp"
-    with open(file_temp, "w") as file:
+    with open(PATH_DATA + file_temp, "w") as file:
         file.write(content)
-    os.rename(file_temp, filename)
+    os.rename(PATH_DATA + file_temp, filename)
+
+
+def clear_file(filename: str) -> None:
+    if os.path.exists(PATH_DATA + filename):
+        os.remove(PATH_DATA + filename)
 
 
 def lights_init(bridge_url_base: str, light_targets: str) -> set:
@@ -96,14 +104,14 @@ def get_file_content(
     is_json=False,
     is_int=False,
 ) -> Union[str, None]:
-    if not os.path.exists(filename):
+    if not os.path.exists(PATH_DATA + filename):
         return None
-    modified_timestamp = os.path.getmtime(filename)
+    modified_timestamp = os.path.getmtime(PATH_DATA + filename)
     if (
         datetime.now() - datetime.fromtimestamp(modified_timestamp)
     ).total_seconds() > if_modified_by_seconds:
         return None
-    with open(filename, "r") as f:
+    with open(PATH_DATA + filename, "r") as f:
         results = f.read()
         if results == "":
             return None
@@ -121,5 +129,35 @@ def get_validation_schema(incomingKey: str):
         LOUDNESS_SENSITIVITY = fields.Int(
             required=False, validate=Range(min=0, max=250)
         )
+        NIGHT_VISION = fields.Int(required=False, validate=Range(min=0, max=1))
 
     return update_input_schema()
+
+
+def get_data():
+    app_data = {}
+
+    for item in constants.DATA_ITEMS:
+        value = ""
+        match item:
+            case constants.FILE_ATMOSPHERE:
+                value = get_file_content(
+                    filename=item,
+                    if_modified_by_seconds=60,
+                    is_json=True,
+                )
+            case constants.FILE_ATMOSPHERE_OUTSIDE:
+                value = get_file_content(
+                    filename=item,
+                    if_modified_by_seconds=60 * 60 + 1,
+                    is_json=True,
+                )
+
+            case _:
+                value = get_file_content(item)
+
+        if value == None:
+            continue
+        app_data[item] = value
+
+    return app_data

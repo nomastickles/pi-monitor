@@ -31,9 +31,8 @@
     "start": "PUBLIC_URL=/ react-scripts start",
     "start:demo": "REACT_APP_IS_DEMO=1 && yarn start",
     "build": "react-scripts build",
-    "build:local": "PUBLIC_URL=/ react-scripts build",
     "test": "react-scripts test",
-    "build:copy-files": "yarn build:local && ./copy_files_to_flask.sh pi 192.168.5.123",
+    "build:local": "yarn build:local && ./update_external.sh pi 192.168.5.123",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build -u 'github-actions-bot <support+actions@github.com>'"
   },

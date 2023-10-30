@@ -1,12 +1,15 @@
 from dotenv import load_dotenv, find_dotenv
 from flask import Flask, render_template, request, abort
-import constants
 import os
 import utils
+import constants
 
 load_dotenv(find_dotenv())
 
+PATH_SSL_CRT = os.environ.get("PATH_SSL_CRT")
+PATH_SSL_KEY = os.environ.get("PATH_SSL_KEY")
 APP_SECRET = os.environ.get("APP_SECRET")
+
 validation_schema = utils.get_validation_schema(APP_SECRET)
 PORT = 8765
 app = Flask(__name__)
@@ -18,15 +21,14 @@ def update():
     if errors:
         abort(418)
 
-    if request.args.get("LOUDNESS_BASE"):
-        utils.write_file(
-            constants.FILE_LOUDNESS_BASE, request.args.get("LOUDNESS_BASE")
-        )
-    if request.args.get("LOUDNESS_SENSITIVITY"):
-        utils.write_file(
-            constants.FILE_LOUDNESS_SENSITIVITY,
-            request.args.get("LOUDNESS_SENSITIVITY"),
-        )
+    for input in constants.DATA_ITEMS:
+        value = request.args.get(input)
+        if value == None:
+            continue
+        if int(value) == 0:
+            utils.clear_file(input)
+        else:
+            utils.write_file(input, value)
     return "ok"
 
 
@@ -36,14 +38,7 @@ def current():
     if errors:
         abort(418)
 
-    return {
-        "LOUDNESS": utils.get_file_content(constants.FILE_LOUDNESS),
-        "ATMOSPHERE": utils.get_file_content(
-            filename=constants.FILE_ATMOSPHERE,
-            if_modified_by_seconds=60,
-            is_json=True,
-        ),
-    }
+    return utils.get_data()
 
 
 @app.route("/", methods=["GET"])
@@ -52,29 +47,16 @@ def index():
     if errors:
         return abort(418)
 
-    app_data = {
-        "LOUDNESS": utils.get_file_content(constants.FILE_LOUDNESS),
-        "LOUDNESS_BASE": utils.get_file_content(constants.FILE_LOUDNESS_BASE),
-        "LOUDNESS_SENSITIVITY": utils.get_file_content(
-            constants.FILE_LOUDNESS_SENSITIVITY
-        ),
-        "ATMOSPHERE": utils.get_file_content(
-            filename=constants.FILE_ATMOSPHERE,
-            if_modified_by_seconds=60,
-            is_json=True,
-        ),
-        "ATMOSPHERE_OUTSIDE": utils.get_file_content(
-            filename=constants.FILE_ATMOSPHERE_OUTSIDE,
-            if_modified_by_seconds=60 * 60 + 1,
-            is_json=True,
-        ),
-        "KEY": APP_SECRET,
-    }
+    app_data = utils.get_data()
+    app_data["KEY"] = APP_SECRET
 
     return render_template("index.html", app_data=app_data)
 
 
 if __name__ == "__main__":
     if not APP_SECRET:
-        raise ValueError("no APP_SECRET")
-    app.run(host="0.0.0.0", port=PORT)
+        raise ValueError("😈")
+    if PATH_SSL_CRT and PATH_SSL_KEY:
+        print("🌈🔐 ssl_context")
+        context = (PATH_SSL_CRT, PATH_SSL_KEY)
+    app.run(host="0.0.0.0", port=PORT, debug=False, ssl_context=context)

@@ -5,7 +5,7 @@
 
 if [ ! $# -eq 2 ]; then
   echo "two arumentents needed"
-  echo "example: ./blink1-audio.sh http://192.168.50.123:8765/current?key=someKey -37"
+  echo "example: sh ./blink1_monitor_audio.sh "http://192.168.50.123:8765/current?key=someKey" -37"
   exit 1
 fi
 

@@ -20,35 +20,13 @@ The more sound the microphone picks up, the brighter the connected smart lights 
 
 ```sh
 
-# 1. clone the repo in your pi
-# 2. install the deps
+# clone the repo in your pi and
 
-sudo apt update
-sudo apt full-upgrade -y
-sudo apt-get install -y libportaudio0 libportaudio2 libportaudiocpp0 portaudio19-dev libatlas-base-dev
+chmod u+x setup.sh && ./setup.sh
 
-pip install pyaudio pyloudnorm python-dotenv marshmallow
-pip install --upgrade numpy
-pip install --upgrade Flask
+# then edit start_monitor_audio.sh with your mic index and other options
 
-# 3. fill out ./backend/.env file
-cp ./backend/.env-sample ./backend/.env
-
-# following should have “Class=Audio, Driver=snd-usb-audio”
-lsusb -t
-# 4. running get_audio_device_index will tell you the mic index is
-python3 ./backend/get_audio_device_index.py
-
-chmod a+x start_monitor_audio.sh start_monitor_ui.sh start_monitor_atmosphere.sh
-
-# 5. then edit start_monitor_audio.sh with your mic index and other options (and make files executable)
-./start_monitor_audio.sh
-
-# 6. run the UI
-./start_monitor_ui.sh
-
-# (optional) if temperature sensor in play:
-./get_outside_atmosphere.sh
+./start
 ```
 
 ## ./backend/.env
@@ -81,9 +59,8 @@ Example cron:
 
 ## TODO
 
-- HTTPS
 - count nearby network mac addresses with Airodump-ng and save to file
-- send all values of /tmp/pi-monitor files to managed grafana in aws
+- connect value in /tmp to Prometheus metrics system
 
 ## Resources + Help
 
