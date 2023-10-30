@@ -6,5 +6,4 @@
 
 LOG_FILE_NV="/tmp/NV-$(date +"%FT%H%M%S").log"
 nohup ./blink1_monitor_night_vision.sh >>"$LOG_FILE_NV" 2>&1 &
-ps aux | grep blink1
 ls -tpr /tmp/NV-* | tail -n 1

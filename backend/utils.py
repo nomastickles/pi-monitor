@@ -139,22 +139,24 @@ def get_data():
 
     for item in constants.DATA_ITEMS:
         value = ""
-        match item:
-            case constants.FILE_ATMOSPHERE:
-                value = get_file_content(
-                    filename=item,
-                    if_modified_by_seconds=60,
-                    is_json=True,
-                )
-            case constants.FILE_ATMOSPHERE_OUTSIDE:
-                value = get_file_content(
-                    filename=item,
-                    if_modified_by_seconds=60 * 60 + 1,
-                    is_json=True,
-                )
 
-            case _:
-                value = get_file_content(item)
+        if item == constants.FILE_ATMOSPHERE:
+            value = get_file_content(
+                filename=item,
+                if_modified_by_seconds=60,
+                is_json=True,
+            )
+            continue
+
+        if item == constants.FILE_ATMOSPHERE_OUTSIDE:
+            value = get_file_content(
+                filename=item,
+                if_modified_by_seconds=60 * 60 + 1,
+                is_json=True,
+            )
+            continue
+
+        value = get_file_content(item)
 
         if value == None:
             continue
