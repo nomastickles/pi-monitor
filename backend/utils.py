@@ -33,7 +33,7 @@ def write_file(filename: str, content: str) -> None:
     file_temp = f"{filename}-temp"
     with open(PATH_DATA + file_temp, "w") as file:
         file.write(content)
-    os.rename(PATH_DATA + file_temp, filename)
+    os.rename(PATH_DATA + file_temp, PATH_DATA + filename)
 
 
 def clear_file(filename: str) -> None:
@@ -136,7 +136,6 @@ def get_validation_schema(incomingKey: str):
 
 def get_data():
     app_data = {}
-
     for item in constants.DATA_ITEMS:
         value = ""
 
@@ -146,20 +145,19 @@ def get_data():
                 if_modified_by_seconds=60,
                 is_json=True,
             )
-            continue
-
-        if item == constants.FILE_ATMOSPHERE_OUTSIDE:
+        elif item == constants.FILE_ATMOSPHERE_OUTSIDE:
             value = get_file_content(
                 filename=item,
                 if_modified_by_seconds=60 * 60 + 1,
                 is_json=True,
             )
+        else:
+            print("🖤 item !!", item)
+            value = get_file_content(item)
+
+        if value == "" or value == None:
             continue
 
-        value = get_file_content(item)
-
-        if value == None:
-            continue
         app_data[item] = value
 
     return app_data

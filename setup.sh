@@ -25,3 +25,5 @@ cd ./blink1-tool && make
 ./blink1-tool --add_udev_rule
 sudo cp blink1-tool /usr/local/bin
 blink1-tool --millis 2000 -b 100 --green
+
+sleep 5 && reboot
