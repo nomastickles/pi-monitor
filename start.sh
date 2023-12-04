@@ -25,4 +25,6 @@ ps aux | grep monitor_ui.py
 ls -lt data
 
 # Experimental
-# nohup ./blink1_monitor_night_vision.sh >>"$LOG_FILE_NV" 2>&1 &
+# nohup ./led_monitor_night_vision.sh \
+#   >>"./data/MONITOR_NIGHT_VISION_$(date +"%FT%H%M%S").log" 2>&1 &
+# ps aux | grep VISION_
