@@ -9,12 +9,11 @@ import json
 from typing import Union
 import numpy
 
-
-PATH_DATA = "/tmp/"
+PATH_NAME = str(Path.cwd()) + "/data/"
 
 
 def check_for_halt() -> bool:
-    if os.path.exists(PATH_DATA + constants.FILE_HALT):
+    if os.path.exists(PATH_NAME + constants.DATA_HALT):
         return True
     return False
 
@@ -31,14 +30,15 @@ def has_datetime_elapsed(datetime_incoming: datetime) -> bool:
 
 def write_file(filename: str, content: str) -> None:
     file_temp = f"{filename}-temp"
-    with open(PATH_DATA + file_temp, "w") as file:
+    with open(PATH_NAME + file_temp, "w") as file:
         file.write(content)
-    os.rename(PATH_DATA + file_temp, PATH_DATA + filename)
+    os.rename(PATH_NAME + file_temp, PATH_NAME + filename)
 
 
 def clear_file(filename: str) -> None:
-    if os.path.exists(PATH_DATA + filename):
-        os.remove(PATH_DATA + filename)
+    os.write(PATH_NAME + filename, "")
+    if os.path.exists(PATH_NAME + filename):
+        os.remove(PATH_NAME + filename)
 
 
 def lights_init(bridge_url_base: str, light_targets: str) -> set:
@@ -104,14 +104,14 @@ def get_file_content(
     is_json=False,
     is_int=False,
 ) -> Union[str, None]:
-    if not os.path.exists(PATH_DATA + filename):
+    if not os.path.exists(PATH_NAME + filename):
         return None
-    modified_timestamp = os.path.getmtime(PATH_DATA + filename)
+    modified_timestamp = os.path.getmtime(PATH_NAME + filename)
     if (
         datetime.now() - datetime.fromtimestamp(modified_timestamp)
     ).total_seconds() > if_modified_by_seconds:
         return None
-    with open(PATH_DATA + filename, "r") as f:
+    with open(PATH_NAME + filename, "r") as f:
         results = f.read()
         if results == "":
             return None
@@ -139,13 +139,13 @@ def get_data():
     for item in constants.DATA_ITEMS:
         value = ""
 
-        if item == constants.FILE_ATMOSPHERE:
+        if item == constants.DATA_ATMOSPHERE:
             value = get_file_content(
                 filename=item,
                 if_modified_by_seconds=60,
                 is_json=True,
             )
-        elif item == constants.FILE_ATMOSPHERE_OUTSIDE:
+        elif item == constants.DATA_ATMOSPHERE_OUTSIDE:
             value = get_file_content(
                 filename=item,
                 if_modified_by_seconds=60 * 60 + 1,

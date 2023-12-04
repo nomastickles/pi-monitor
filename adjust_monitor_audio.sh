@@ -1,19 +1,19 @@
 #!/bin/bash
 
-# (To be used after ./start_monitor_audio.sh)
-# This can adjust base loudness and sensitivity if you are not using monitor_ui stuff
+# (To be used after ./backend/monitor_audio.py is running)
+# This can adjust base loudness and sensitivity without monitor_ui stuff
 
 # Examples:
-# ./adjust_monitor_audio.sh "/tmp/pi-monitor-loudness-base" -50
-# ./adjust_monitor_audio.sh "/tmp/pi-monitor-loudness-sensitivity" 60
+# ./adjust_monitor_audio.sh "./data/pi-monitor-loudness-base" -50
+# ./adjust_monitor_audio.sh "./data/pi-monitor-loudness-sensitivity" 60
 
 if [[ $# != 2 ]]; then
   echo "need two arguments"
   exit 1
 fi
 
-if ! [[ $1 =~ ^/tmp/pi-monitor-*$ ]]; then
-  echo "needs to be pi-monitor file"
+if ! [[ $1 =~ ^./data/MONITOR_AUDIO_*$ ]]; then
+  echo "needs audio monitoring"
 fi
 
 FILE=$1

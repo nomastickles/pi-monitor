@@ -1,9 +1,26 @@
 #!/bin/bash
 
-./start_monitor_atmosphere.sh
-./start_monitor_audio.sh
-./start_monitor_ui.sh
+# TODO: change LIGHTS to be dynamic / file based
+LIGHTS="Hue Go,Hue Go Go"
+MIC_DEVICE_INDEX=4
+FLASK_DEBUG=1
 
-LOG_FILE_NV="/tmp/NV-$(date +"%FT%H%M%S").log"
-nohup ./blink1_monitor_night_vision.sh >>"$LOG_FILE_NV" 2>&1 &
-ls -tpr /tmp/NV-* | tail -n 1
+nohup python ./backend/monitor_atmosphere.py \
+  >>"./data/MONITOR_ATMOSPHERE_$(date +"%FT%H%M%S").log" 2>&1 &
+ps aux | grep monitor_atmosphere.py
+
+# TODO: add .env values as args taken from exported shell variables
+nohup python ./backend/monitor_audio.py \
+  --input-device-index $MIC_DEVICE_INDEX \
+  --bridge-light-names "$LIGHTS" \
+  --display-visual \
+  --record-loudness \
+  >>"./data/MONITOR_AUDIO_$(date +"%FT%H%M%S").log" 2>&1 &
+ps aux | grep monitor_audio.py
+
+nohup python ./backend/monitor_ui.py \
+  >>"./data/MONITOR_UI_$(date +"%FT%H%M%S").log" 2>&1 &
+ps aux | grep monitor_ui.py
+
+# Experimental
+# nohup ./blink1_monitor_night_vision.sh >>"$LOG_FILE_NV" 2>&1 &

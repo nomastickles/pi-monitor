@@ -29,10 +29,11 @@
   },
   "scripts": {
     "start": "PUBLIC_URL=/ react-scripts start",
-    "start:demo": "REACT_APP_IS_DEMO=1 && yarn start",
+    "start:demo": "export REACT_APP_IS_DEMO=1 && yarn start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "build:local": "yarn build:local && ./update_external.sh pi 192.168.5.123",
+    "build:local": "PUBLIC_URL=/ react-scripts build",
+    "build:copy-files-to-flask": "yarn build:local && ./copy_files_to_flask.sh $MONITOR_USER $MONITOR_HOST",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build -u 'github-actions-bot <support+actions@github.com>'"
   },

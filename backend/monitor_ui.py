@@ -54,6 +54,7 @@ def index():
 
 
 if __name__ == "__main__":
+    context = None
     if not APP_SECRET:
         raise ValueError("😈")
     if PATH_SSL_CRT and PATH_SSL_KEY:

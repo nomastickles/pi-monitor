@@ -54,7 +54,7 @@ def main():
                 "HUMIDITY": humidity,
             }
 
-            utils.write_file(constants.FILE_ATMOSPHERE, json.dumps(data))
+            utils.write_file(constants.DATA_ATMOSPHERE, json.dumps(data))
 
         except RuntimeError as error:
             # Errors happen fairly often, DHT's are hard to read, just keep going

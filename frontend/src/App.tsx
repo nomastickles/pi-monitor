@@ -29,11 +29,11 @@ function App() {
   const dispatch = useAppDispatch();
   const updateDataToServer = useUpdateDataToServer();
   const logMultiplierValue = Number(
-    appData.LOUDNESS_SENSITIVITY || DEFAULT_LOGARITHMIC_MULTIPLIER
+    appData.DATA_LOUDNESS_SENSITIVITY || DEFAULT_LOGARITHMIC_MULTIPLIER
   );
   const logarithmicEquation = `log10(x)*${logMultiplierValue}`;
   const key = `${appData["KEY"]}`;
-  const isUsingLogarithmic = Number(appData.LOUDNESS_SENSITIVITY) !== 0;
+  const isUsingLogarithmic = Number(appData.DATA_LOUDNESS_SENSITIVITY) !== 0;
 
   const getCurrentInfo = React.useCallback(async () => {
     var url = new URL(`${window.location.origin}/current`);
@@ -47,14 +47,14 @@ function App() {
 
       dispatch(
         actions.setAppData({
-          dataName: "LOUDNESS",
-          data: data?.LOUDNESS,
+          dataName: "DATA_LOUDNESS",
+          data: data?.DATA_LOUDNESS,
         })
       );
       dispatch(
         actions.setAppData({
-          dataName: "ATMOSPHERE",
-          data: data?.ATMOSPHERE,
+          dataName: "DATA_ATMOSPHERE",
+          data: data?.DATA_ATMOSPHERE,
         })
       );
     } catch (e) {
@@ -106,21 +106,21 @@ function App() {
   }, [logarithmicEquation, isUsingLogarithmic]);
 
   const atmosphereRows: AtmosphereRow[] = [];
-  if (appData.ATMOSPHERE) {
+  if (appData.DATA_ATMOSPHERE) {
     atmosphereRows.push({
       name: "Inside",
-      tempC: appData.ATMOSPHERE.TEMP_C,
-      tempF: appData.ATMOSPHERE.TEMP_F,
-      humidity: appData.ATMOSPHERE.HUMIDITY,
+      tempC: appData.DATA_ATMOSPHERE.TEMP_C,
+      tempF: appData.DATA_ATMOSPHERE.TEMP_F,
+      humidity: appData.DATA_ATMOSPHERE.HUMIDITY,
     });
   }
 
-  if (appData.ATMOSPHERE_OUTSIDE) {
+  if (appData.DATA_ATMOSPHERE_OUTSIDE) {
     atmosphereRows.push({
       name: "Outside",
-      tempC: appData.ATMOSPHERE_OUTSIDE.TEMP_C,
-      tempF: appData.ATMOSPHERE_OUTSIDE.TEMP_F,
-      humidity: appData.ATMOSPHERE_OUTSIDE.HUMIDITY,
+      tempC: appData.DATA_ATMOSPHERE_OUTSIDE.TEMP_C,
+      tempF: appData.DATA_ATMOSPHERE_OUTSIDE.TEMP_F,
+      humidity: appData.DATA_ATMOSPHERE_OUTSIDE.HUMIDITY,
     });
   }
 
@@ -129,19 +129,18 @@ function App() {
       <header className="App-header">
         <Box sx={{ width: "85%", maxWidth: 400, mt: 2 }}>
           <AtmosphereTable rows={atmosphereRows} />
-
           <Typography gutterBottom variant="h5">
             <Stack direction="row" spacing={1}>
               <MicIcon sx={{ color: "#1976d2", fontSize: "1.7em" }} />
               <Box sx={{ ml: 0, pr: 1 }}>
                 <Equalizer />
               </Box>
-              <div>{appData.LOUDNESS || "?"} dB</div>
+              <div>{appData.DATA_LOUDNESS || "?"} dB</div>
             </Stack>
           </Typography>
           <Box sx={{ m: 4 }} />
 
-          <Typography gutterBottom>Threshold dB</Typography>
+          <Typography gutterBottom>Audio Threshold dB</Typography>
           <Box sx={{ m: 3 }} />
           <Slider
             aria-label="Loudness"
@@ -155,18 +154,18 @@ function App() {
                 label: "0 dB",
               },
             ]}
-            value={Number(appData.LOUDNESS_BASE || DEFAULT_LOUDNESS_BASE)}
+            value={Number(appData.DATA_LOUDNESS_BASE || DEFAULT_LOUDNESS_BASE)}
             valueLabelDisplay="on"
             min={-80}
             max={0}
             onChange={(event: any) => {
               dispatch(
                 actions.setAppData({
-                  dataName: "LOUDNESS_BASE",
+                  dataName: "DATA_LOUDNESS_BASE",
                   data: event.target.value,
                 })
               );
-              updateDataToServer("LOUDNESS_BASE", event.target.value);
+              updateDataToServer("DATA_LOUDNESS_BASE", event.target.value);
             }}
           />
           <Box sx={{ m: 3 }} />
@@ -179,11 +178,11 @@ function App() {
 
                 dispatch(
                   actions.setAppData({
-                    dataName: "LOUDNESS_SENSITIVITY",
+                    dataName: "DATA_LOUDNESS_SENSITIVITY",
                     data: value,
                   })
                 );
-                updateDataToServer("LOUDNESS_SENSITIVITY", `${value}`);
+                updateDataToServer("DATA_LOUDNESS_SENSITIVITY", `${value}`);
               }}
             />
           </FormGroup>
@@ -199,17 +198,49 @@ function App() {
             onChange={(event: any) => {
               dispatch(
                 actions.setAppData({
-                  dataName: "LOUDNESS_SENSITIVITY",
+                  dataName: "DATA_LOUDNESS_SENSITIVITY",
                   data: event.target.value,
                 })
               );
-              updateDataToServer("LOUDNESS_SENSITIVITY", event.target.value);
+              updateDataToServer(
+                "DATA_LOUDNESS_SENSITIVITY",
+                event.target.value
+              );
             }}
           />
           <Typography gutterBottom>{logarithmicEquation}</Typography>
           <Box sx={{ ml: -4 }}>
             <div id="function-plot"></div>
           </Box>
+
+          <Typography gutterBottom>Night Vision</Typography>
+          <Box sx={{ m: 3 }} />
+          <Slider
+            aria-label="Night Vision Level"
+            marks={[
+              {
+                value: 0,
+                label: "0",
+              },
+              {
+                value: 255,
+                label: "255",
+              },
+            ]}
+            value={Number(appData.DATA_NIGHT_VISION_LEVEL || 0)}
+            valueLabelDisplay="off"
+            min={0}
+            max={255}
+            onChange={(event: any) => {
+              dispatch(
+                actions.setAppData({
+                  dataName: "DATA_NIGHT_VISION_LEVEL",
+                  data: event.target.value,
+                })
+              );
+              updateDataToServer("DATA_NIGHT_VISION_LEVEL", event.target.value);
+            }}
+          />
         </Box>
       </header>
     </div>

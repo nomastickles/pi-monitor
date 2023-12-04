@@ -71,20 +71,20 @@ def main():
     peak_loudness = utils.get_peak_loudness_reset()
 
     base_loudness = (
-        utils.get_file_content(filename=constants.FILE_LOUDNESS_BASE, is_int=True)
+        utils.get_file_content(filename=constants.DATA_LOUDNESS_BASE, is_int=True)
         or args.base_loudness
     )
     light_brightness_logarithmic_multiplier = (
         utils.get_file_content(
-            filename=constants.FILE_LOUDNESS_SENSITIVITY, is_int=True
+            filename=constants.DATA_LOUDNESS_SENSITIVITY, is_int=True
         )
         or args.light_brightness_sensitivity
     )
 
     # writing to files now ensures a values are set
-    utils.write_file(constants.FILE_LOUDNESS_BASE, str(base_loudness))
+    utils.write_file(constants.DATA_LOUDNESS_BASE, str(base_loudness))
     utils.write_file(
-        constants.FILE_LOUDNESS_SENSITIVITY,
+        constants.DATA_LOUDNESS_SENSITIVITY,
         str(light_brightness_logarithmic_multiplier),
     )
 
@@ -140,7 +140,7 @@ def main():
             if utils.has_datetime_elapsed(datetime_delay_update_values_from_files):
                 base_loudness = (
                     utils.get_file_content(
-                        filename=constants.FILE_LOUDNESS_BASE,
+                        filename=constants.DATA_LOUDNESS_BASE,
                         if_modified_by_seconds=args.update_delay_seconds,
                         is_int=True,
                     )
@@ -148,7 +148,7 @@ def main():
                 )
                 light_brightness_logarithmic_multiplier = (
                     utils.get_file_content(
-                        filename=constants.FILE_LOUDNESS_SENSITIVITY,
+                        filename=constants.DATA_LOUDNESS_SENSITIVITY,
                         if_modified_by_seconds=args.update_delay_seconds,
                         is_int=True,
                     )
@@ -166,7 +166,7 @@ def main():
             ):
                 threading.Thread(
                     target=utils.write_file,
-                    args=(constants.FILE_LOUDNESS, str(peak_loudness)),
+                    args=(constants.DATA_LOUDNESS, str(peak_loudness)),
                 ).start()
 
                 peak_loudness = utils.get_peak_loudness_reset()

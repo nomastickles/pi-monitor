@@ -1,10 +1,11 @@
 export type AppDataNames =
-  | "LOUDNESS"
-  | "LOUDNESS_BASE"
-  | "LOUDNESS_SENSITIVITY"
   | "KEY"
-  | "ATMOSPHERE"
-  | "ATMOSPHERE_OUTSIDE";
+  | "DATA_LOUDNESS"
+  | "DATA_LOUDNESS_BASE"
+  | "DATA_LOUDNESS_SENSITIVITY"
+  | "DATA_ATMOSPHERE"
+  | "DATA_ATMOSPHERE_OUTSIDE"
+  | "DATA_NIGHT_VISION_LEVEL";
 
 export type AppData = Partial<Record<AppDataNames, any>>;
 

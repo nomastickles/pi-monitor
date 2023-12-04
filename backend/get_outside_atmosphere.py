@@ -50,7 +50,7 @@ def main():
         }
 
         data_string = json.dumps(data)
-        utils.write_file(constants.FILE_ATMOSPHERE_OUTSIDE, data_string)
+        utils.write_file(constants.DATA_ATMOSPHERE_OUTSIDE, data_string)
         logging.debug(data_string)
 
     except Exception as error:

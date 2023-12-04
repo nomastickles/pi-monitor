@@ -8,35 +8,34 @@ DEMO: [https://nomastickles.github.io/pi-monitor/](https://nomastickles.github.i
 
 This is a python + react ui audio monitoring tool (indicative of baby monitoring tools that visually show loudness of a room) using a raspberry pi, usb microphone, and Philips Hue Bridge lights system.
 
-The more sound the microphone picks up, the brighter the connected smart lights shine with sensitivity and base loudness adjustments (enabling tweaking the mic for the room).
+The more sound the microphone picks up, the brighter the connected smart lights shine with sensitivity and base loudness adjustments options.
 
-## What you need
+## Tools Used
 
 - rpi + usb microphone
 - philips hue bridge light system on same local network as rpi
-- (optional) DHT22 temperature + humidity sensor
+- DHT22 temperature + humidity sensor
 
-## How to run this
+## Setup
 
 ```sh
 
-# clone the repo in your pi and
+# clone the repo
 
-chmod u+x setup.sh && ./setup.sh
+chmod +x setup.sh && \
+  chmod +x start.sh && \
+  ./setup.sh
 
-# then edit start_monitor_audio.sh with your mic index and other options
+# then set your mic index and other options
 
-./start
+./start.sh
 ```
 
 ## ./backend/.env
 
-APP_SECRET = simple not very secure way to gate all flask routes
-
+APP_SECRET = simple not very secure way to gate all flask routes in your network
 BRIDGE_USERNAME = username from Hue bridge
-
 BRIDGE_HOST=http://192.168.30.20
-
 WEATHER_API_USER_AGENT_SECRET = used with api.weather.gov to get outside metrics
 example: "(pi-monitor, your@email.com)"
 
@@ -59,8 +58,10 @@ Example cron:
 
 ## TODO
 
+- change .env values to these to command line args / exported values in start.sh
+- unify data file values types/constants frontend + backend
 - count nearby network mac addresses with Airodump-ng and save to file
-- connect value in /tmp to Prometheus metrics system
+- connect data values in /tmp to Prometheus metrics system
 
 ## Resources + Help
 
