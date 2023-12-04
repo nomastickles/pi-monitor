@@ -50,16 +50,9 @@ def write_file(
     os.rename(path + file_temp, path + filename)
 
 
-def clear_file(
-    filename: str,
-    use_temp_file=False,
-) -> None:
-    path = PATH_NAME
-    if use_temp_file:
-        path = "/tmp/"
-    os.write(path + filename, "")
-    if os.path.exists(path + filename):
-        os.remove(path + filename)
+def clear_file(filename: str) -> None:
+    if os.path.exists(PATH_NAME + filename):
+        os.remove(PATH_NAME + filename)
 
 
 def lights_init(bridge_url_base: str, light_targets: str) -> set:
