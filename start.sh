@@ -3,7 +3,7 @@
 # TODO: change LIGHTS to be dynamic / file based
 LIGHTS="Hue Go,Hue Go Go"
 MIC_DEVICE_INDEX=4
-FLASK_DEBUG=1
+# FLASK_DEBUG=1
 
 nohup python ./backend/monitor_atmosphere.py \
   >>"./data/MONITOR_ATMOSPHERE_$(date +"%FT%H%M%S").log" 2>&1 &

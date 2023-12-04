@@ -172,7 +172,6 @@ def get_data():
                 use_temp_file=True,
             )
         else:
-            print("🖤 item !!", item)
             value = get_file_content(item)
 
         if value == "" or value == None:

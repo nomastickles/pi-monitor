@@ -4,7 +4,8 @@ while [ true ]; do
 
   sleep 5
   FILE="./data/DATA_NIGHT_VISION_LEVEL"
-  VALUE=$(cat ./data/DATA_NIGHT_VISION_LEVEL)
+  BRIGHTNESS=$(cat ./data/DATA_NIGHT_VISION_LEVEL)
+  COLOR="magenta"
   NOTE=$(blink1-tool --readnote 8)
 
   if ! [ -f "$FILE" ]; then
@@ -27,7 +28,7 @@ while [ true ]; do
 
   echo "TURN IT ON"
 
-  blink1-tool --millis 10000 -b "$VALUE" --red
+  blink1-tool --millis 10000 -b "$BRIGHTNESS" --$COLOR
   blink1-tool --writenote 8 --notestr 'ON'
 
 done
