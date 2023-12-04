@@ -36,6 +36,20 @@ def write_file(filename: str, content: str) -> None:
     os.rename(PATH_NAME + file_temp, PATH_NAME + filename)
 
 
+def write_file(
+    filename: str,
+    content: str,
+    use_temp_file=False,
+) -> None:
+    path = PATH_NAME
+    if use_temp_file:
+        path = "/tmp/"
+    file_temp = f"{filename}-temp"
+    with open(path + file_temp, "w") as file:
+        file.write(content)
+    os.rename(path + file_temp, path + filename)
+
+
 def clear_file(filename: str) -> None:
     os.write(PATH_NAME + filename, "")
     if os.path.exists(PATH_NAME + filename):
@@ -104,15 +118,19 @@ def get_file_content(
     if_modified_by_seconds: int = numpy.inf,
     is_json=False,
     is_int=False,
+    use_temp_file=False,
 ) -> Union[str, None]:
-    if not os.path.exists(PATH_NAME + filename):
+    path = PATH_NAME
+    if use_temp_file:
+        path = "/tmp/"
+    if not os.path.exists(path + filename):
         return None
-    modified_timestamp = os.path.getmtime(PATH_NAME + filename)
+    modified_timestamp = os.path.getmtime(path + filename)
     if (
         datetime.now() - datetime.fromtimestamp(modified_timestamp)
     ).total_seconds() > if_modified_by_seconds:
         return None
-    with open(PATH_NAME + filename, "r") as f:
+    with open(path + filename, "r") as f:
         results = f.read()
         if results == "":
             return None
@@ -151,6 +169,7 @@ def get_data():
                 filename=item,
                 if_modified_by_seconds=60 * 60 + 1,
                 is_json=True,
+                use_temp_file=True,
             )
         else:
             print("🖤 item !!", item)
