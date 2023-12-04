@@ -20,14 +20,15 @@ while [ true ]; do
     continue
   fi
 
-  # now on
-  if [[ "$NOTE" =~ .*"ON".* ]]; then
+  BRIGHTNESS=$(cat ./data/DATA_NIGHT_VISION_LEVEL)
+
+  now on
+  if [[ "$NOTE" =~ .*"ON $BRIGHTNESS $COLOR".* ]]; then
     continue
   fi
 
-  echo "TURN IT ON"
-  BRIGHTNESS=$(cat ./data/DATA_NIGHT_VISION_LEVEL)
-  blink1-tool --millis 10000 -b "$BRIGHTNESS" --$COLOR
-  blink1-tool --writenote 8 --notestr 'ON'
+  echo "blink1-tool --millis 10000 -b $BRIGHTNESS --$COLOR"
+  blink1-tool --millis 10000 -b $BRIGHTNESS --$COLOR
+  blink1-tool --writenote 8 --notestr "ON $BRIGHTNESS $COLOR"
 
 done
