@@ -22,9 +22,8 @@ nohup python ./backend/monitor_ui.py \
   >>"./data/MONITOR_UI_$(date +"%FT%H%M%S").log" 2>&1 &
 ps aux | grep monitor_ui.py
 
-ls -lt data
+nohup ./led_monitor_night_vision.sh \
+  >>"./data/MONITOR_NIGHT_VISION_$(date +"%FT%H%M%S").log" 2>&1 &
+ps aux | grep VISION_
 
-# Experimental
-# nohup ./led_monitor_night_vision.sh \
-#   >>"./data/MONITOR_NIGHT_VISION_$(date +"%FT%H%M%S").log" 2>&1 &
-# ps aux | grep VISION_
+ls -lt data
