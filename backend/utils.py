@@ -144,11 +144,13 @@ def get_file_content(
 def get_validation_schema(incomingKey: str):
     class update_input_schema(Schema):
         key = fields.Str(required=True, validate=Equal(incomingKey))
-        LOUDNESS_BASE = fields.Int(required=False, validate=Range(min=-80, max=0))
-        LOUDNESS_SENSITIVITY = fields.Int(
+        DATA_LOUDNESS_BASE = fields.Int(required=False, validate=Range(min=-80, max=0))
+        DATA_LOUDNESS_SENSITIVITY = fields.Int(
             required=False, validate=Range(min=0, max=250)
         )
-        NIGHT_VISION = fields.Int(required=False, validate=Range(min=0, max=1))
+        DATA_NIGHT_VISION_LEVEL = fields.Int(
+            required=False, validate=Range(min=0, max=255)
+        )
 
     return update_input_schema()
 
