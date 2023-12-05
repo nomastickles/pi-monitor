@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "INIT"
+
 while [ true ]; do
 
   sleep 5
