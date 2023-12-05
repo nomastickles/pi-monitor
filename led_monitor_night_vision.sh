@@ -22,7 +22,6 @@ while [ true ]; do
 
   BRIGHTNESS=$(cat ./data/DATA_NIGHT_VISION_LEVEL)
 
-  now on
   if [[ "$NOTE" =~ .*"ON $BRIGHTNESS $COLOR".* ]]; then
     continue
   fi
