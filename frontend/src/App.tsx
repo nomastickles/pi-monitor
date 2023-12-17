@@ -169,6 +169,8 @@ function App() {
             }}
           />
           <Box sx={{ m: 3 }} />
+          <Typography gutterBottom>Night Vision Level</Typography>
+          <Box sx={{ m: 3 }} />
           <Slider
             aria-label="Night Vision Level"
             marks={[
@@ -199,7 +201,7 @@ function App() {
           <FormGroup>
             <FormControlLabel
               control={<Switch checked={isUsingLogarithmic} />}
-              label="Use Logarithmic Sensitivity"
+              label="Mic Logarithmic Factor"
               onChange={(_, checked) => {
                 let value = !checked ? 0 : DEFAULT_LOGARITHMIC_MULTIPLIER;
 
@@ -239,8 +241,6 @@ function App() {
           <Box sx={{ ml: -4 }}>
             <div id="function-plot"></div>
           </Box>
-
-          <Typography gutterBottom>Night Vision</Typography>
         </Box>
       </header>
     </div>
