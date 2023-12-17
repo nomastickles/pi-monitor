@@ -140,7 +140,7 @@ function App() {
           </Typography>
           <Box sx={{ m: 4 }} />
 
-          <Typography gutterBottom>Audio Threshold dB</Typography>
+          <Typography gutterBottom>Mic Threshold dB</Typography>
           <Box sx={{ m: 3 }} />
           <Slider
             aria-label="Loudness"
@@ -169,10 +169,37 @@ function App() {
             }}
           />
           <Box sx={{ m: 3 }} />
+          <Slider
+            aria-label="Night Vision Level"
+            marks={[
+              {
+                value: 0,
+                label: "0",
+              },
+              {
+                value: 255,
+                label: "255",
+              },
+            ]}
+            value={Number(appData.DATA_NIGHT_VISION_LEVEL || 0)}
+            valueLabelDisplay="off"
+            min={0}
+            max={255}
+            onChange={(event: any) => {
+              dispatch(
+                actions.setAppData({
+                  dataName: "DATA_NIGHT_VISION_LEVEL",
+                  data: event.target.value,
+                })
+              );
+              updateDataToServer("DATA_NIGHT_VISION_LEVEL", event.target.value);
+            }}
+          />
+          <Box sx={{ m: 3 }} />
           <FormGroup>
             <FormControlLabel
               control={<Switch checked={isUsingLogarithmic} />}
-              label="Logarithmic Sensitivity"
+              label="Use Logarithmic Sensitivity"
               onChange={(_, checked) => {
                 let value = !checked ? 0 : DEFAULT_LOGARITHMIC_MULTIPLIER;
 
@@ -214,33 +241,6 @@ function App() {
           </Box>
 
           <Typography gutterBottom>Night Vision</Typography>
-          <Box sx={{ m: 3 }} />
-          <Slider
-            aria-label="Night Vision Level"
-            marks={[
-              {
-                value: 0,
-                label: "0",
-              },
-              {
-                value: 255,
-                label: "255",
-              },
-            ]}
-            value={Number(appData.DATA_NIGHT_VISION_LEVEL || 0)}
-            valueLabelDisplay="off"
-            min={0}
-            max={255}
-            onChange={(event: any) => {
-              dispatch(
-                actions.setAppData({
-                  dataName: "DATA_NIGHT_VISION_LEVEL",
-                  data: event.target.value,
-                })
-              );
-              updateDataToServer("DATA_NIGHT_VISION_LEVEL", event.target.value);
-            }}
-          />
         </Box>
       </header>
     </div>

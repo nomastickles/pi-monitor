@@ -5,6 +5,9 @@ LIGHTS="Hue Go,Hue Go Go"
 MIC_DEVICE_INDEX=4
 # FLASK_DEBUG=1
 
+# reset logs
+rm ./data/MONITOR_*
+
 nohup python ./backend/monitor_atmosphere.py \
   >>"./data/MONITOR_ATMOSPHERE_$(date +"%FT%H%M%S").log" 2>&1 &
 ps aux | grep monitor_atmosphere.py

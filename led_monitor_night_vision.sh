@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo "INIT"
+echo "RESET"
+blink1-tool --writenote 8 --notestr 'OFF'
 
 while [ true ]; do
 

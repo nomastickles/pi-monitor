@@ -3,7 +3,7 @@
 sudo apt update
 sudo apt full-upgrade -y
 sudo apt install git -y
-sudo apt-get install -y libportaudio0 libportaudio2 libportaudiocpp0 portaudio19-dev libatlas-base-dev
+sudo apt-get install -y libportaudio0 libportaudio2 libportaudiocpp0 portaudio19-dev libatlas-base-dev jq
 
 pip install pyaudio pyloudnorm python-dotenv marshmallow
 pip install --upgrade numpy
