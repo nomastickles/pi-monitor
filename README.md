@@ -35,7 +35,7 @@ chmod +x setup.sh && \
 
 APP_SECRET = simple not very secure way to gate all flask routes in your network
 BRIDGE_USERNAME = username from Hue bridge
-BRIDGE_HOST=http://192.168.30.20
+BRIDGE_HOST=http://192.168.99.99
 WEATHER_API_USER_AGENT_SECRET = used with api.weather.gov to get outside metrics
 example: "(pi-monitor, your@email.com)"
 

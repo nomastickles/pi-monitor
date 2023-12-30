@@ -14,7 +14,7 @@ TEMP=$3
 while true; do
   RESULT=$(curl "$HOST" | jq '.DATA_ATMOSPHERE.TEMP_F')
   if (($(echo "$RESULT < $TEMP" | bc -l))); then
-    echo "TOO COLD 🛟"
+    echo "TOO COLD 🛟 $TEMP"
     curl -d $RESULT $TOPIC
     sleep 4
   else
