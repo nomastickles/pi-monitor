@@ -8,7 +8,7 @@ if [ -z "$LIGHTS" ]; then
 fi
 
 if [ -z "$MIC_DEVICE_INDEX" ]; then
-  echo "Must provide LIGHTS in environment" 1>&2
+  echo "Must provide MIC_DEVICE_INDEX in environment" 1>&2
   exit 1
 fi
 
