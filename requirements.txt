@@ -3,3 +3,4 @@ python-dotenv
 marshmallow
 pyaudio
 Flask
+requests

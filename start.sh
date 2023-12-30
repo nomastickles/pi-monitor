@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # TODO: change LIGHTS to be dynamic / file based
+
+source myenv/bin/activate
+
 LIGHTS="Hue Go,Hue Go Go"
 MIC_DEVICE_INDEX=4
 # FLASK_DEBUG=1

@@ -8,7 +8,7 @@ DEMO: [https://nomastickles.github.io/pi-monitor/](https://nomastickles.github.i
 
 This is a python + react ui audio monitoring tool (indicative of baby monitoring tools that visually show loudness of a room) using a raspberry pi, usb microphone, and Philips Hue Bridge lights system.
 
-The more sound the microphone picks up, the brighter the connected smart lights shine with sensitivity and base loudness adjustments options.
+The more sound the microphone picks up, the brighter the connected smart lights shine with sensitivity and base loudness adjustments.
 
 ## Tools Used
 
@@ -58,8 +58,7 @@ Example cron:
 
 ## TODO
 
-- change .env values to these to command line args / exported values in start.sh
-- unify data file values types/constants frontend + backend
+- ~~unify data file values types/constants frontend + backend~~
 - count nearby network mac addresses with Airodump-ng and save to file
 - connect data values in /tmp to Prometheus metrics system
 
