@@ -2,10 +2,16 @@
 
 # TODO: change LIGHTS to be dynamic / file based
 
-source myenv/bin/activate
+if [ -z "$LIGHTS" ]; then
+  echo "Must provide LIGHTS in environment" 1>&2
+  exit 1
+fi
 
-LIGHTS="Hue Go,Hue Go Go"
-MIC_DEVICE_INDEX=4
+if [ -z "$MIC_DEVICE_INDEX" ]; then
+  echo "Must provide LIGHTS in environment" 1>&2
+  exit 1
+fi
+
 # FLASK_DEBUG=1
 
 # reset logs

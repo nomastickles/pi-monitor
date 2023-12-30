@@ -26,9 +26,13 @@ chmod +x setup.sh && \
   chmod +x start.sh && \
   ./setup.sh
 
-# then set your mic index and other options
+# fill out your info
+nano ./backend/.env
 
-./start.sh
+# run it
+source myenv/bin/activate && \
+  export $(grep -v '^#' ./backend/.env | xargs -d '\n') && \
+  ./start.sh
 ```
 
 ## ./backend/.env
