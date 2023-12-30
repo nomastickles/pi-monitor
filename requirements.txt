@@ -1,0 +1,5 @@
+pyloudnorm
+python-dotenv
+marshmallow
+pyaudio
+Flask

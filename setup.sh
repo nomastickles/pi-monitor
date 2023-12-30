@@ -2,12 +2,18 @@
 
 # 32 BIT for now
 
-sudo apt update
+apt-get update -y
+apt-get upgrade -y
+
 # sudo apt full-upgrade -y
-sudo apt-get install -y git python3-pyaudio jq pyloudnorm python-dotenv marshmallow
+# apt-get install -y git python3-pyaudio jq pyloudnorm python-dotenv marshmallow
 # sudo apt-get install -y git libportaudio0 libportaudio2 libportaudiocpp0 portaudio19-dev libatlas-base-dev jq pyaudio pyloudnorm python-dotenv marshmallow
-pip install --upgrade numpy
-pip install --upgrade Flask
+# pip install --upgrade numpy
+# pip install --upgrade Flask
+
+python3 -m pip install virtualenv
+python3 -m virtualenv venv
+source venv/bin/activate
 
 # 3. fill out ./backend/.env file
 cp ./backend/.env-sample ./backend/.env
