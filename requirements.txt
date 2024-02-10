@@ -4,3 +4,5 @@ marshmallow
 pyaudio
 Flask
 requests
+Adafruit_DHT
+prometheus_flask_exporter

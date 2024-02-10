@@ -10,6 +10,8 @@ sudo apt install -y portaudio19-dev python3-flask jq
 python3 -m venv myenv
 source myenv/bin/activate
 pip install -r requirements.txt
+# pip install Adafruit_DHT --install-option="--force-pi"
+# pip install --upgrade pip setuptools wheel
 
 # 3. be sure to fill this out
 cp ./backend/.env-sample ./backend/.env

@@ -30,8 +30,9 @@ chmod +x setup.sh && \
 nano ./backend/.env
 
 # run it
-source myenv/bin/activate && \
-  export $(grep -v '^#' ./backend/.env | xargs -d '\n') && \
+source pimonitor/bin/activate && \
+  export PATH_SSL_CRT="/home/user/tailscale.crt" && \
+  export PATH_SSL_KEY="/home/user/tailscale.key" && \
   ./start.sh
 ```
 

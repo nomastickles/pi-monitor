@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 from marshmallow import Schema, fields
 from marshmallow.validate import Range, Equal
-from pathlib import Path
 import constants
 import os
 import requests
@@ -10,7 +9,7 @@ import json
 from typing import Union
 import numpy
 
-PATH_NAME = str(Path.cwd()) + "/data/"
+PATH_NAME = str(os.getcwd()) + "/data/"
 
 
 def check_for_halt() -> bool:

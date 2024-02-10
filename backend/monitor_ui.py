@@ -4,6 +4,10 @@ import os
 import utils
 import constants
 
+# https://pypi.org/project/prometheus-flask-exporter/
+# https://github.com/rycus86/prometheus_flask_exporter/blob/master/examples/sample-signals/grafana/dashboards/example.json
+# from prometheus_flask_exporter import PrometheusMetrics
+
 load_dotenv(find_dotenv())
 
 PATH_SSL_CRT = os.environ.get("PATH_SSL_CRT")
@@ -13,6 +17,7 @@ APP_SECRET = os.environ.get("APP_SECRET")
 validation_schema = utils.get_validation_schema(APP_SECRET)
 PORT = 8765
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
 
 
 @app.route("/update", methods=["GET"])
