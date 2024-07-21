@@ -17,7 +17,9 @@ APP_SECRET = os.environ.get("APP_SECRET")
 validation_schema = utils.get_validation_schema(APP_SECRET)
 PORT = 8765
 app = Flask(__name__)
-metrics = PrometheusMetrics(app)
+# metrics = PrometheusMetrics(app)
+
+# metrics.info("monitor-ui", "Pi Monitor UI", version="1.0.0")
 
 
 @app.route("/update", methods=["GET"])

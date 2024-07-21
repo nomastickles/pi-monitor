@@ -7,18 +7,22 @@
 #   exit 1
 # fi
 
-# if [ -z "$MIC_DEVICE_INDEX" ]; then
-#   echo "Must provide MIC_DEVICE_INDEX in environment" 1>&2
-#   exit 1
-# fi
-
 LIGHTS="Hue Go,Hue Go Go"
-MIC_DEVICE_INDEX=1
 
 # FLASK_DEBUG=1
 
 # reset logs
 rm ./data/MONITOR_*
+
+source myenv/bin/activate
+
+MIC_INFO=$(python3 ./backend/get_audio_device_index.py | grep "USB Audio")
+MIC_DEVICE_INDEX=$(echo "$MIC_INFO" | awk '{print substr($0, 17, 1)}')
+
+if [ -z "$MIC_DEVICE_INDEX" ]; then
+  echo "MIC_DEVICE_INDEX not found" 1>&2
+  exit 1
+fi
 
 # nohup python ./backend/monitor_atmosphere.py \
 #   >>"./data/MONITOR_ATMOSPHERE_$(date +"%FT%H%M%S").log" 2>&1 &

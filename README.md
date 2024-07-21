@@ -24,16 +24,14 @@ The more sound the microphone picks up, the brighter the connected smart lights 
 
 chmod +x setup.sh && \
   chmod +x start.sh && \
+  chmod +x led_monitor_night_vision.sh && \
   ./setup.sh
 
 # fill out your info
 nano ./backend/.env
 
 # run it
-source pimonitor/bin/activate && \
-  export PATH_SSL_CRT="/home/user/tailscale.crt" && \
-  export PATH_SSL_KEY="/home/user/tailscale.key" && \
-  ./start.sh
+source myenv/bin/activate && pip install -r requirements.txt && sudo ./start.sh
 ```
 
 ## ./backend/.env
